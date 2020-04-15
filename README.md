@@ -16,5 +16,5 @@ cd thunderx-smoke
 
 ## References
 
-[NumPy Tutorial](https://cs231n.github.io/python-numpy-tutorial/)
-[Basic Numerical Integration: the Trapezoid Rule](https://nbviewer.jupyter.org/github/ipython/ipython/blob/master/examples/IPython%20Kernel/Trapezoid%20Rule.ipynb)
+- [NumPy Tutorial](https://cs231n.github.io/python-numpy-tutorial/)
+- [Basic Numerical Integration: the Trapezoid Rule](https://nbviewer.jupyter.org/github/ipython/ipython/blob/master/examples/IPython%20Kernel/Trapezoid%20Rule.ipynb)
