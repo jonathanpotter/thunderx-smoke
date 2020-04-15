@@ -38,3 +38,4 @@ integral_trapezoid = sum( (xint[1:] - xint[:-1]) * (yint[1:] + yint[:-1]) ) / 2
 
 print("The integral is:", integral, "+/-", error)
 print("The trapezoid approximation with", len(xint), "points is:", integral_trapezoid)
+print("NumPy and SciPy are working!")
