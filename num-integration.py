@@ -34,8 +34,10 @@ yint = f(xint)
 integral, error = quad(f, a, b)
 
 # Use NumPy to calculate the area with the trapezoid approximation
-integral_trapezoid = sum( (xint[1:] - xint[:-1]) * (yint[1:] + yint[:-1]) ) / 2
+integral_trapezoid = sum( (xint[1:] - xint[:-1]) * (yint[1:] + yint[:-1])
+    ) / 2
 
 print("The integral is:", integral, "+/-", error)
-print("The trapezoid approximation with", len(xint), "points is:", integral_trapezoid)
+print("The trapezoid approximation with", len(xint),
+    "points is:", integral_trapezoid)
 print("NumPy and SciPy are working!")
