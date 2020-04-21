@@ -2,6 +2,11 @@
 # Basic Numerical Integration: the Trapezoid Rule
 # https://nbviewer.jupyter.org/github/ipython/ipython/blob/master/examples/IPython%20Kernel/Trapezoid%20Rule.ipynb
 
+from pyspark import SparkContext
+
+sc = SparkContext(appName = "NumericIntegration")
+
+import pandas as pd
 import numpy as np
 from scipy.integrate import quad
 #import matplotlib.pyplot as plt
@@ -12,7 +17,21 @@ def f(x):
     return (x-3)*(x-5)*(x-7)+85
 
 x = np.linspace(0, 10, 200)
+#x = np.linspace(0, 10, 200000)
+#x = np.linspace(0, 10, 200000000)
 y = f(x)
+
+# Create an RDD in PySpark from large text file in HDFS
+rdd = sc.textFile("/data/complete-works-of-shakespeare.txt")
+
+# Create function to make it all lower-case and split the lines into words,
+# creating a new RDD with each element being a word.
+def Func(lines):
+    lines = lines.lower()
+    lines = lines.split()
+    return lines
+
+rdd_flat  = rdd.flatMap(Func)
 
 # Use NumPy to choose a region to integrate over and take only a few points in that region
 
@@ -32,12 +51,13 @@ yint = f(xint)
 
 # Use SciPy to calculate the integral
 integral, error = quad(f, a, b)
+print("The integral is:", integral, "+/-", error)
 
 # Use NumPy to calculate the area with the trapezoid approximation
 integral_trapezoid = sum( (xint[1:] - xint[:-1]) * (yint[1:] + yint[:-1])
     ) / 2
-
-print("The integral is:", integral, "+/-", error)
 print("The trapezoid approximation with", len(xint),
     "points is:", integral_trapezoid)
+
 print("NumPy and SciPy are working!")
+################################################################
