@@ -13,7 +13,8 @@ cd thunderx-smoke
 # Run a test with Python 3.7.4 with NumPy and SciPy modules on login node.
 /sw/dsi/aarch64/centos7/python/3.7.4/bin/python3 ./num-integration.py
 
-# Launch PySpark with Python 3.74 with `default` queue
+# Launch PySpark with Python 3.74 with `default` queue and interactive console
+# Setting N num-executors will give you N+1 CPU vCores and containers.
 pyspark --master yarn --queue default \
   --num-executors 10 \
   --conf "spark.pyspark.python=/sw/dsi/aarch64/centos7/python/3.7.4/bin/python3" \
@@ -22,8 +23,26 @@ pyspark --master yarn --queue default \
 # Enter contents of num-integration.py file.
 
 # Submit a test to Spark
+# Job will run and then terminate in about 1 minute.
+# Note that the job actually runs locally is not in the cluster.
 spark-submit --master yarn --queue default \
-  ../spark/examples/src/main/python/pi.py 10
+  --num-executors 5 \
+  ./num-integration.py
+
+# Test word count
+spark-submit --master yarn --queue workshop \
+  --num-executors 40 \
+  --conf "spark.pyspark.python=/sw/dsi/aarch64/centos7/python/3.7.4/bin/python3" \
+  --conf "spark.pyspark.driver.python=/sw/dsi/aarch64/centos7/python/3.7.4/bin/python3" \
+  ./word-count.py
+
+# Submit a test to Spark
+# Job will run and then terminate in about 1 minute.
+spark-submit --master yarn --queue default \
+  --num-executors 10 \
+  --conf "spark.pyspark.python=/sw/dsi/aarch64/centos7/python/3.7.4/bin/python3" \
+  --conf "spark.pyspark.driver.python=/sw/dsi/aarch64/centos7/python/3.7.4/bin/python3" \
+  /usr/lib/spark/examples/src/main/python/pi.py 100
 ```
 
 ## References
