@@ -26,6 +26,4 @@ rdd_grouped = rdd_mapped.groupByKey()
 rdd_frequency = rdd_grouped.mapValues(sum).map(lambda x: (x[1],x[0])).sortByKey(False)
 
 # Print the 10 most frequent words.
-print("##########################################################")
-print(rdd_frequency.take(10))
-print("##########################################################")
+print("The 10 most frequent words: {0}".format(rdd_frequency.take(10)))

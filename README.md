@@ -25,8 +25,11 @@ spark-submit --master yarn --queue workshop \
   ./numpy-test.py
 
 # Test SciPy with a numeric integration.
+# This test does not run on the datanodes; only on the login node. Needs improvement.
 spark-submit --master yarn --queue workshop \
   --num-executors 5 \
+  --conf "spark.pyspark.python=/sw/dsi/aarch64/centos7/python/3.7.4/bin/python3" \
+  --conf "spark.pyspark.driver.python=/sw/dsi/aarch64/centos7/python/3.7.4/bin/python3" \
   ./numeric-integration.py
 
 # Test word count
