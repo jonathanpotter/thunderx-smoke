@@ -10,6 +10,13 @@ ssh <UNIQNAME>@cavium-thunderx.arc-ts.umich.edu
 git clone <THIS_REPO>
 cd thunderx-smoke
 
+# Test NumPy with simple mod.
+spark-submit --master yarn --queue workshop \
+  --num-executors 5 \
+  --conf "spark.pyspark.python=/sw/dsi/aarch64/centos7/python/3.7.4/bin/python3" \
+  --conf "spark.pyspark.driver.python=/sw/dsi/aarch64/centos7/python/3.7.4/bin/python3" \
+  ./cluster-spark-yarn.py
+
 # Run a test with Python 3.7.4 with NumPy and SciPy modules on login node.
 /sw/dsi/aarch64/centos7/python/3.7.4/bin/python3 ./num-integration.py
 
