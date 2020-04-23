@@ -12,7 +12,7 @@ cd thunderx-smoke
 
 # Test NumPy with simple mod.
 spark-submit --master yarn --queue workshop \
-  --num-executors 5 \
+  --num-executors 20 \
   --conf "spark.pyspark.python=/sw/dsi/aarch64/centos7/python/3.7.4/bin/python3" \
   --conf "spark.pyspark.driver.python=/sw/dsi/aarch64/centos7/python/3.7.4/bin/python3" \
   ./cluster-spark-yarn.py
