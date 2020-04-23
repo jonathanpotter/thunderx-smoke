@@ -24,12 +24,10 @@ spark-submit --master yarn --queue workshop \
   --conf "spark.pyspark.driver.python=/sw/dsi/aarch64/centos7/python/3.7.4/bin/python3" \
   ./numpy-test.py
 
-# Submit a test to Spark
-# Job will run and then terminate in about 1 minute.
-# Note that the job actually runs locally is not in the cluster.
-spark-submit --master yarn --queue default \
+# Test SciPy with a numeric integration.
+spark-submit --master yarn --queue workshop \
   --num-executors 5 \
-  ./num-integration.py
+  ./numeric-integration.py
 
 # Test word count
 spark-submit --master yarn --queue workshop \
@@ -38,6 +36,10 @@ spark-submit --master yarn --queue workshop \
   --conf "spark.pyspark.driver.python=/sw/dsi/aarch64/centos7/python/3.7.4/bin/python3" \
   ./word-count.py
 ```
+
+## Configuration
+
+Note that Python2 is the default installation on the cluster for use by system tools. Users must specify Python3 if they want to use the latest modules such as NumPy. Otherwise, these tests and their jobs will likely fail.
 
 ## References
 
