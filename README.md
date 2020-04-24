@@ -38,6 +38,28 @@ spark-submit --master yarn --queue workshop \
   --conf "spark.pyspark.python=/sw/dsi/aarch64/centos7/python/3.7.4/bin/python3" \
   --conf "spark.pyspark.driver.python=/sw/dsi/aarch64/centos7/python/3.7.4/bin/python3" \
   ./word-count.py
+
+# Test Spark's MLlib
+rm -r /hadoop-fuse/user/jonpot/target/*
+spark-submit --master yarn --queue workshop \
+  --num-executors 40 \
+  --conf "spark.pyspark.python=/sw/dsi/aarch64/centos7/python/3.7.4/bin/python3" \
+  --conf "spark.pyspark.driver.python=/sw/dsi/aarch64/centos7/python/3.7.4/bin/python3" \
+  ./logistic_regression_with_lbfgs_example.py
+
+# Success looks like this. A success exit code and the program output a model.
+echo $?
+  0
+tree /hadoop-fuse/user/jonpot/target/
+  /hadoop-fuse/user/jonpot/target/
+  └── tmp
+      └── pythonLogisticRegressionWithLBFGSModel
+          ├── data
+          │   ├── part-00000-276ffa3a-a3de-4f5d-b4f1-73aa43177ee6-c000.snappy.parquet
+          │   └── _SUCCESS
+          └── metadata
+              ├── part-00000
+              └── _SUCCESS
 ```
 
 ## Configuration
